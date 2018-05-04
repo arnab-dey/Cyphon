@@ -1,0 +1,17 @@
+#built application
+*.apk
+*.ap_
+
+# Java class files
+*.class
+
+*.iml
+.gradle
+/local.properties
+.idea
+#/.idea/workspace.xml
+#/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
