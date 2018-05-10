@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/mod_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="N/A"
+        android:textSize="35dp"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/mod_answer_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Answer"
+        android:textSize="15dp"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/mod_reject_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reject"
+        android:textSize="15dp"
+        android:visibility="visible" />
 
 </LinearLayout>
