@@ -78,7 +78,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
 
     /*For incoming UI*/
     private static final int SHOW_INCOMING_UI = 2;
-    private Intent incomingIntent;
     private boolean userSelected;
 
     /*Alert variables*/
@@ -390,8 +389,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         filter.addAction(BluetoothHeadsetClient.ACTION_AUDIO_STATE_CHANGED);
         this.registerReceiver(br, filter);
 
-        incomingIntent = new Intent(this, IncomingActivity.class);
-        incomingIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         userSelected = false;
 
         //c.getLatestInboxMessages(device, 2);
@@ -413,48 +410,15 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                 userSelected = true;
                 if(RESULT_OK == resultCode) {
                     String action = data.getStringExtra("ACTION");
+                    BluetoothDevice device = data.getParcelableExtra("EXTRA_DEVICE_INCOMING_ACTIVITY");
                     if((null != action) && (action.equals("answer"))) {
-                        if(!mBluetoothHeadsetClient.acceptCall(mCurrentCallingDevice, 0)) { /*answer call*/ /*TODO -0=CALL_ACCEPT_NONE*/
+                        if(!answerCall(device)) { /*answer call*/ /*TODO -0=CALL_ACCEPT_NONE*/
                             Log.e(TAG, "onClick: answering call failed as device got disconnected");
-                            showHfpClientDialog(mCurrentCallingDevice, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
-                            break;
+                            showHfpClientDialog(device, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
                         }
-                    }
-                }
-                Log.d(TAG, "onClick: on clicked endcall button ");
-                BluetoothHeadsetClientCall callInfo = getClientCall(mCurrentCallingDevice);
-                if(null != callInfo) {
-                /*If there is a single call and the call is in held state send hold cmd*/
-                    if ((getNumHeldCall(callInfo.getDevice()) >= 1) && (0 == getNumActiveCall(callInfo.getDevice()))) {
-                        mBluetoothHeadsetClient.rejectCall(callInfo.getDevice());
+                        break;
                     } else {
-                        if((BluetoothHeadsetClientCall.CALL_STATE_DIALING == callInfo.getState()) ||
-                                (BluetoothHeadsetClientCall.CALL_STATE_ALERTING == callInfo.getState()) ||
-                                (BluetoothHeadsetClientCall.CALL_STATE_ACTIVE == callInfo.getState())) {
-                            if(!mBluetoothHeadsetClient.terminateCall(callInfo.getDevice(), callInfo)) {
-                                Log.e(TAG, "onClick: terminate call failed as device got disconnected..");
-                            /*Dialog shows that device is disconnected*/
-                                showHfpClientDialog(mCurrentCallingDevice, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
-                            }
-                        } else {
-                            if(!mBluetoothHeadsetClient.rejectCall(callInfo.getDevice())) {
-                                Log.e(TAG, "onClick: hanging up failed as device got disconnected..");
-                            /*Dialog shows that device is disconnected*/
-                                showHfpClientDialog(mCurrentCallingDevice, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
-                            }
-                        }
-                    }
-                } else {
-                    Log.e(TAG, "onClick: No call info found");
-                }
-                Log.d(TAG, "onClick: Hanging up the call..");
-                if(mBluetoothDevice.equals(mCurrentCallingDevice)) {
-                    displayState.setText("Hanging up");
-                } else {
-                    if(mDeviceMap.containsKey(mCurrentCallingDevice)) {
-                        if(null != mDeviceMap.get(mCurrentCallingDevice)) {
-                            displayState2.setText("Hanging up");
-                        }
+                        endCall(device);
                     }
                 }
                 break;
@@ -665,6 +629,49 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    private boolean answerCall(BluetoothDevice device) {
+        return mBluetoothHeadsetClient.acceptCall(device, 0);
+    }
+
+    private void endCall(BluetoothDevice device) {
+        Log.d(TAG, "endCall function called");
+        BluetoothHeadsetClientCall callInfo = getClientCall(device);
+        if(null != callInfo) {
+                /*If there is a single call and the call is in held state send hold cmd*/
+            if ((getNumHeldCall(callInfo.getDevice()) >= 1) && (0 == getNumActiveCall(callInfo.getDevice()))) {
+                mBluetoothHeadsetClient.rejectCall(callInfo.getDevice());
+            } else {
+                if((BluetoothHeadsetClientCall.CALL_STATE_DIALING == callInfo.getState()) ||
+                        (BluetoothHeadsetClientCall.CALL_STATE_ALERTING == callInfo.getState()) ||
+                        (BluetoothHeadsetClientCall.CALL_STATE_ACTIVE == callInfo.getState())) {
+                    if(!mBluetoothHeadsetClient.terminateCall(callInfo.getDevice(), callInfo)) {
+                        Log.e(TAG, "onClick: terminate call failed as device got disconnected..");
+                            /*Dialog shows that device is disconnected*/
+                        showHfpClientDialog(device, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
+                    }
+                } else {
+                    if(!mBluetoothHeadsetClient.rejectCall(callInfo.getDevice())) {
+                        Log.e(TAG, "onClick: hanging up failed as device got disconnected..");
+                            /*Dialog shows that device is disconnected*/
+                        showHfpClientDialog(device, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
+                    }
+                }
+            }
+        } else {
+            Log.e(TAG, "endCall: No call info found");
+        }
+        Log.d(TAG, "endCall: Hanging up the call..");
+        if(mBluetoothDevice.equals(device)) {
+            displayState.setText("Hanging up");
+        } else {
+            if(mDeviceMap.containsKey(device)) {
+                if(null != mDeviceMap.get(device)) {
+                    displayState2.setText("Hanging up");
+                }
+            }
+        }
+    }
+
     /**
      * This function handles all the button press events
      */
@@ -687,7 +694,7 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                 }
             } else {
                 Log.d(TAG, "onClick: on clicked answer button");
-                if(!mBluetoothHeadsetClient.acceptCall(mCurrentCallingDevice, 0)) { /*answer call*/ /*TODO -0=CALL_ACCEPT_NONE*/
+                if(!answerCall(mCurrentCallingDevice)) { /*answer call*/ /*TODO -0=CALL_ACCEPT_NONE*/
                     Log.e(TAG, "onClick: answering call failed as device got disconnected");
                     showHfpClientDialog(mCurrentCallingDevice, CyHfpClientDeviceConstants.HF_DEVICE_NOTCONNECTED_DIALOG_ID, null);
                 }
@@ -1470,6 +1477,9 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                 endCall.setVisibility(View.VISIBLE);
                 break;
             case BluetoothHeadsetClientCall.CALL_STATE_INCOMING:
+                Intent incomingIntent = new Intent(this, IncomingActivity.class);
+                incomingIntent.putExtra("EXTRA_DEVICE_HOME_ACTIVITY", device);
+                incomingIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 if(null == number) {
                     updateViewOnIncoming();
                     incomingIntent.putExtra("EXTRA_NUMBER_HOME_ACTIVITY", "N/A");
@@ -1864,6 +1874,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
 
         switch(callSetup) {
             case BluetoothHeadsetClientCall.CALL_STATE_ACTIVE:
+                if((null != device) && (device.equals(mCurrentCallingDevice))) {
+                    Intent intent1 = new Intent("finish_activity");
+                    intent1.putExtra("EXTRA_DEVICE_HOME_ACTIVITY", device);
+                    sendBroadcast(intent1);
+                }
+                /*Fall through*/
             case BluetoothHeadsetClientCall.CALL_STATE_DIALING:
             case BluetoothHeadsetClientCall.CALL_STATE_ALERTING:
             case BluetoothHeadsetClientCall.CALL_STATE_INCOMING:
@@ -1895,6 +1911,11 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                             mCurrentCallingDevice = entry.getKey();
                         }
                     }
+                }
+                if(null != device) {
+                    Intent intent = new Intent("finish_activity");
+                    intent.putExtra("EXTRA_DEVICE_HOME_ACTIVITY", device);
+                    sendBroadcast(intent);
                 }
                 break;
         }

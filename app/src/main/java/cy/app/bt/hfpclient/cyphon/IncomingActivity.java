@@ -1,6 +1,7 @@
 package cy.app.bt.hfpclient.cyphon;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,8 @@ public class IncomingActivity extends Activity {
     private Button rejectButton;
     private TextView numberView;
 
+    private BluetoothDevice device1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -31,6 +34,7 @@ public class IncomingActivity extends Activity {
         registerReceiver(broadcastReceiver, new IntentFilter("finish_activity"));
 
         String number = getIntent().getStringExtra("EXTRA_NUMBER_HOME_ACTIVITY");
+        device1 = (BluetoothDevice) getIntent().getParcelableExtra("EXTRA_DEVICE_HOME_ACTIVITY");
         numberView = (TextView)findViewById(R.id.mod_number);
         if(null != number) {
             numberView.setText(number);
@@ -45,6 +49,7 @@ public class IncomingActivity extends Activity {
                 String message = "answer";
                 Intent intent = new Intent();
                 intent.putExtra("ACTION", message);
+                intent.putExtra("EXTRA_DEVICE_INCOMING_ACTIVITY", device1);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -57,10 +62,16 @@ public class IncomingActivity extends Activity {
                 String message = "reject";
                 Intent intent = new Intent();
                 intent.putExtra("ACTION", message);
+                intent.putExtra("EXTRA_DEVICE_INCOMING_ACTIVITY", device1);
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        /*Nothing should be here to prevent back press*/
     }
 
     @Override
@@ -80,7 +91,10 @@ public class IncomingActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(action.equals("finish_activity")) {
-                finish();
+                BluetoothDevice device = intent.getParcelableExtra("EXTRA_DEVICE_HOME_ACTIVITY");
+                if((null != device) && (device.equals(device1))) {
+                    finish();
+                }
             }
         }
     };
