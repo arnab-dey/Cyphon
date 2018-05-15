@@ -5,12 +5,31 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/mod_number_on_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="N/A"
+        android:textSize="25dp"
+        android:visibility="gone"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/mod_on_call_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="On Call"
+        android:textSize="15dp"
+        android:visibility="gone"
+        android:gravity="center_horizontal"/>
+
+    <TextView
         android:id="@+id/mod_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="N/A"
         android:textSize="35dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/mod_answer_button"
@@ -27,5 +46,29 @@
         android:text="Reject"
         android:textSize="15dp"
         android:visibility="visible" />
+
+    <Button
+        android:id="@+id/mod_reject_waiting_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reject Waiting"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/mod_accept_waiting_release_active_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accept Waiting Release Active"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/mod_accept_waiting_hold_active_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accept Waiting Hold Active"
+        android:textSize="15dp"
+        android:visibility="gone" />
 
 </LinearLayout>
