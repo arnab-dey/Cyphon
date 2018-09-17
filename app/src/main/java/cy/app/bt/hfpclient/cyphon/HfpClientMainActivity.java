@@ -1102,12 +1102,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                     }
                 }
 
-                if (mDeviceMap.get(device).currentBatteryCharge != batteryCharge) {
+                //if (mDeviceMap.get(device).currentBatteryCharge != batteryCharge) {
                     mDeviceMap.get(device).currentBatteryCharge = batteryCharge;
                     if(mBluetoothDevice.equals(device)) {
                         updateBatteryStatus(mDeviceMap.get(device).currentBatteryCharge);
                     }
-                }
+                //}
             }
         }
     }

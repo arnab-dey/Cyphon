@@ -31,6 +31,7 @@ public class IncomingActivity extends Activity {
     private Button acceptWaitingHoldActiveButton;
 
     private BluetoothDevice device1;
+    private BluetoothDevice device2;
     private boolean hasWaiting;
 
     @Override
@@ -118,12 +119,28 @@ public class IncomingActivity extends Activity {
             }
         });
 
+        numberOnCallView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String numberTmp = (String)numberOnCallView.getText();
+                numberOnCallView.setText(numberView.getText());
+                numberView.setText(numberTmp);
+                if(!hasWaiting) {
+                    onCallTextView.setText(device1.getName() + ": Incoming");
+                }
+                BluetoothDevice deviceTmp = device2;
+                device2 = device1;
+                device1 = deviceTmp;
+            }
+        });
+
         postProcess(getIntent().getBooleanExtra("SHOW_WAITING_UI", false));
     }
 
     private void postProcess(boolean isWaitingUI) {
         if(isWaitingUI) {
             hasWaiting = true;
+            onCallTextView.setClickable(false);
             answerButton.setVisibility(View.GONE);
             rejectButton.setVisibility(View.GONE);
             numberOnCallView.setVisibility(View.VISIBLE);
@@ -139,6 +156,7 @@ public class IncomingActivity extends Activity {
             }
         } else {
             hasWaiting = false;
+            onCallTextView.setClickable(true);
             numberOnCallView.setVisibility(View.GONE);
             onCallTextView.setVisibility(View.GONE);
             rejectWaitingButton.setVisibility(View.GONE);
@@ -157,12 +175,24 @@ public class IncomingActivity extends Activity {
     @Override
     public void onNewIntent(Intent intent) {
         Log.d(TAG, "onNewIntent");
+        BluetoothDevice device = intent.getParcelableExtra("EXTRA_DEVICE_HOME_ACTIVITY");
         String number = intent.getStringExtra("EXTRA_NUMBER_HOME_ACTIVITY");
-        numberView = (TextView)findViewById(R.id.mod_number);
-        if(null != number) {
-            numberView.setText(number);
+        if(!device.equals(device1)) {
+            device2 = device;
+            if(!hasWaiting) {
+                numberOnCallView.setText((null != number) ? number:"N/A");
+                onCallTextView.setText(device.getName() + ": Incoming");
+                numberOnCallView.setVisibility(View.VISIBLE);
+                onCallTextView.setVisibility(View.VISIBLE);
+
+            }
         } else {
-            numberView.setText("N/A");
+            numberView = (TextView) findViewById(R.id.mod_number);
+            if (null != number) {
+                numberView.setText(number);
+            } else {
+                numberView.setText("N/A");
+            }
         }
         postProcess(intent.getBooleanExtra("SHOW_WAITING_UI", false));
     }
