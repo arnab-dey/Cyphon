@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cornflower_blue"
     android:id="@+id/hfpclient_connect"
     tools:context="cy.app.bt.hfpclient.cyphon.HfpClientMainActivity">
 
@@ -68,6 +69,191 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_border">
+            <RelativeLayout
+                android:id="@+id/dev1_container"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="30dp"
+                android:background="@color/light_grey"
+                android:layout_alignParentLeft="true">
+                <TextView
+                    android:id="@+id/newdevice1text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="DEVICE 1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                <TextView
+                    android:id="@+id/newdevice1name"
+                    android:layout_below="@+id/newdevice1text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:text="Redmi"/>
+                <TextView
+                    android:id="@+id/newdisplaynumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:maxEms="14"
+                    android:singleLine="true"
+                    android:layout_below="@+id/newdevice1name"
+                    android:text="+91-9900689254"/>
+                <TextView
+                    android:id="@+id/newtitletext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/newdisplaynumber"
+                    android:text="on call"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dev2_container"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:background="@color/light_grey"
+                android:layout_below="@id/dev1_container"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp">
+                <TextView
+                    android:id="@+id/newdevice2text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="DEVICE 2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                <TextView
+                    android:id="@+id/newdevice2name"
+                    android:layout_below="@+id/newdevice2text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:text="Samsung"/>
+                <TextView
+                    android:id="@+id/newdisplaynumber2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/newdevice2name"
+                    android:ellipsize="end"
+                    android:maxEms="14"
+                    android:singleLine="true"
+                    android:text="+91-9900689254"/>
+                <TextView
+                    android:id="@+id/newtitletext2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/newdisplaynumber2"
+                    android:text="on call"/>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/newedittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/carimage"
+                android:layout_marginTop="100dp"
+                android:inputType="phone"
+                android:visibility="invisible"
+                android:hint="Enter Number"/>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newedittext"
+                android:layout_toRightOf="@id/carimage"
+                android:layout_marginRight="20dp">
+                <TableRow>
+                    <Button
+                        android:id="@+id/newdial_button"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/dial"/>
+
+                    <Button
+                        android:id="@+id/newendcall_button"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_toRightOf="@id/newdial_button"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/end_call" />
+
+                    <Button
+                        android:id="@+id/newredial_button"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_toRightOf="@id/newendcall_button"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/redi"/>
+                </TableRow>
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    android:layout_span="3">
+                    <Button
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/call_control"
+                        android:visibility="visible" />
+                        android:id="@+id/newcall_control"
+                    <Button
+                        android:id="@+id/newdisconnect_button"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/disconnect"
+                        android:textSize="18dp"
+                        android:visibility="invisible"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+                    <Button
+                        android:id="@+id/newenhanced_call_control"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/enhanced_call_control"
+                        android:visibility="visible" />
+                </TableRow>
+            </TableLayout>
+
+
+            <ImageView
+                android:id="@+id/carimage"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/car_top"
+                android:layout_centerInParent="true" />
+
+            <ToggleButton
+                android:id="@+id/newvr_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/dev2_container"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/vr_toggle"
+                android:textOn=""
+                android:textOff=""
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+
+        </RelativeLayout>
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
@@ -88,7 +274,8 @@
             <TableRow
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:background="@color/gray">
                 <TextView
                     android:id="@+id/device1text"
                     android:layout_width="wrap_content"
@@ -96,7 +283,7 @@
                     android:textSize="18dp"
                     android:text="@string/device1"
                     android:layout_weight="1"
-                    android:gravity="right"/>
+                    android:gravity="right" />
                 <TextView
                     android:id="@+id/titletext"
                     android:layout_width="wrap_content"
@@ -149,7 +336,7 @@
             android:id="@+id/call_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textSize="10sp">
         </ListView>
         <EditText
