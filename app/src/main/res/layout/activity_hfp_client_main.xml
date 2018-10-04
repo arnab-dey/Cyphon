@@ -32,47 +32,55 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/operator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:visibility="visible"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/subscriberInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:visibility="visible"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/wbsStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:visibility="visible"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/inbandStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:visibility="visible"
-            android:gravity="center_horizontal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/my_border">
+
+            <TextView
+                android:id="@+id/newoperator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/carimage"
+                android:textSize="15dp"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:singleLine="true"
+                android:visibility="visible"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:id="@+id/newsubscriberInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newoperator"
+                android:layout_toEndOf="@id/carimage"
+                android:textSize="15dp"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:singleLine="true"
+                android:visibility="visible"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:id="@+id/newwbsStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newsubscriberInfo"
+                android:layout_toEndOf="@id/carimage"
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:id="@+id/newinbandStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/newwbsStatus"
+                android:layout_toEndOf="@id/carimage"
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:gravity="center_horizontal" />
+
             <RelativeLayout
                 android:id="@+id/dev1_container"
                 android:layout_width="120dp"
@@ -96,25 +104,23 @@
                     android:layout_centerHorizontal="true"
                     android:ellipsize="end"
                     android:maxEms="10"
-                    android:singleLine="true"
-                    android:text="Redmi"/>
+                    android:singleLine="true" />
                 <TextView
                     android:id="@+id/newdisplaynumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:visibility="visible"
                     android:ellipsize="end"
                     android:maxEms="14"
                     android:singleLine="true"
-                    android:layout_below="@+id/newdevice1name"
-                    android:text="+91-9900689254"/>
+                    android:layout_below="@+id/newdevice1name" />
                 <TextView
                     android:id="@+id/newtitletext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/newdisplaynumber"
-                    android:text="on call"/>
+                    android:layout_below="@+id/newdisplaynumber" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -140,25 +146,23 @@
                     android:layout_centerHorizontal="true"
                     android:ellipsize="end"
                     android:maxEms="10"
-                    android:singleLine="true"
-                    android:text="Samsung"/>
+                    android:singleLine="true" />
                 <TextView
                     android:id="@+id/newdisplaynumber2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/newdevice2name"
+                    android:visibility="visible"
                     android:ellipsize="end"
                     android:maxEms="14"
-                    android:singleLine="true"
-                    android:text="+91-9900689254"/>
+                    android:singleLine="true" />
                 <TextView
                     android:id="@+id/newtitletext2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/newdisplaynumber2"
-                    android:text="on call"/>
+                    android:layout_below="@+id/newdisplaynumber2" />
             </RelativeLayout>
 
             <EditText
@@ -166,7 +170,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/carimage"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="20dp"
                 android:inputType="phone"
                 android:visibility="invisible"
                 android:hint="Enter Number"/>
@@ -183,6 +188,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:background="@drawable/dial"/>
 
                     <Button
@@ -192,6 +198,7 @@
                         android:layout_toRightOf="@id/newdial_button"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:background="@drawable/end_call" />
 
                     <Button
@@ -201,34 +208,40 @@
                         android:layout_toRightOf="@id/newendcall_button"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:background="@drawable/redi"/>
                 </TableRow>
                 <TableRow
                     android:layout_marginTop="10dp"
                     android:layout_span="3">
                     <Button
+                        android:id="@+id/newcall_control"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/call_control"
-                        android:visibility="visible" />
-                        android:id="@+id/newcall_control"
-                    <Button
+                        android:visibility="invisible"
+                        android:gravity="bottom|center"/>
+
+                    <ToggleButton
                         android:id="@+id/newdisconnect_button"
                         android:layout_width="0dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
-                        android:text="@string/disconnect"
-                        android:textSize="18dp"
                         android:visibility="invisible"
                         android:layout_weight="1"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:background="@drawable/hf_toggle"
+                        android:textOn=""
+                        android:textOff=""
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"/>
                     <Button
                         android:id="@+id/newenhanced_call_control"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/enhanced_call_control"
-                        android:visibility="visible" />
+                        android:visibility="invisible" />
                 </TableRow>
             </TableLayout>
 
@@ -248,89 +261,25 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/vr_toggle"
+                android:visibility="visible"
                 android:textOn=""
                 android:textOff=""
                 android:focusable="false"
                 android:focusableInTouchMode="false"/>
 
+            <Button
+                android:id="@+id/newswap_ui_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toRightOf="@id/newvr_button"
+                android:layout_below="@id/dev2_container"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:visibility="visible"
+                android:text="SWAP"
+                android:textSize="8dp" />
+
         </RelativeLayout>
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal">
-                <TextView
-                    android:id="@+id/displaynumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:visibility="visible"
-                    android:gravity="center"
-                    android:layout_span="2"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/gray">
-                <TextView
-                    android:id="@+id/device1text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:text="@string/device1"
-                    android:layout_weight="1"
-                    android:gravity="right" />
-                <TextView
-                    android:id="@+id/titletext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:layout_weight="1"
-                    android:gravity="left"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/displaynumber2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:visibility="visible"
-                    android:gravity="center"
-                    android:layout_span="2"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_gravity="center_horizontal">
-                <TextView
-                    android:id="@+id/device2text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:text="@string/device2"
-                    android:layout_weight="1"
-                    android:gravity="right"/>
-                <TextView
-                    android:id="@+id/titletext2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:layout_weight="1"
-                    android:gravity="left"/>
-
-            </TableRow>
-
-        </TableLayout>
 
         <ListView
             android:id="@+id/call_list"
@@ -339,107 +288,7 @@
             android:visibility="gone"
             android:textSize="10sp">
         </ListView>
-        <EditText
-            android:id="@+id/edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:visibility="invisible"
-            android:hint="Enter Number"/>
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/dial_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dial"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    android:layout_weight="1"/>
-                <Button
-                    android:id="@+id/redial_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/redial"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    android:layout_weight="1"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal">
-                <Button
-                    android:id="@+id/call_control"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    android:layout_weight="1"/>
-                <Button
-                    android:id="@+id/enhanced_call_control"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    android:layout_weight="1"/>
-            </TableRow>
-        </TableLayout>
     </LinearLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:stretchColumns="*">
-
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
-            <Button
-                android:id="@+id/disconnect_button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="@string/disconnect"
-                android:textSize="18dp"
-                android:visibility="invisible"
-                android:layout_weight="1"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/endcall_button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="@string/endcall"
-                android:textSize="18dp"
-                android:visibility="invisible"
-                android:layout_weight="1"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/vr_button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="18dp"
-                android:visibility="visible"
-                android:layout_weight="1"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/swap_ui_button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="18dp"
-                android:text="@string/swap_ui"
-                android:visibility="visible"
-                android:layout_weight="1"/>
-        </TableRow>
-    </TableLayout>
 </FrameLayout>
