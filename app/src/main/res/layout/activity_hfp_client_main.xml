@@ -40,7 +40,7 @@
             android:background="@drawable/my_border">
 
             <TextView
-                android:id="@+id/newoperator"
+                android:id="@+id/operator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/carimage"
@@ -51,10 +51,10 @@
                 android:visibility="visible"
                 android:gravity="center_horizontal" />
             <TextView
-                android:id="@+id/newsubscriberInfo"
+                android:id="@+id/subscriberInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/newoperator"
+                android:layout_below="@id/operator"
                 android:layout_toEndOf="@id/carimage"
                 android:textSize="15dp"
                 android:ellipsize="end"
@@ -63,19 +63,19 @@
                 android:visibility="visible"
                 android:gravity="center_horizontal" />
             <TextView
-                android:id="@+id/newwbsStatus"
+                android:id="@+id/wbsStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/newsubscriberInfo"
+                android:layout_below="@id/subscriberInfo"
                 android:layout_toEndOf="@id/carimage"
                 android:textSize="14dp"
                 android:visibility="visible"
                 android:gravity="center_horizontal" />
             <TextView
-                android:id="@+id/newinbandStatus"
+                android:id="@+id/inbandStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/newwbsStatus"
+                android:layout_below="@id/wbsStatus"
                 android:layout_toEndOf="@id/carimage"
                 android:textSize="14dp"
                 android:visibility="visible"
@@ -90,15 +90,15 @@
                 android:background="@color/light_grey"
                 android:layout_alignParentLeft="true">
                 <TextView
-                    android:id="@+id/newdevice1text"
+                    android:id="@+id/device1text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="DEVICE 1"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
                 <TextView
-                    android:id="@+id/newdevice1name"
-                    android:layout_below="@+id/newdevice1text"
+                    android:id="@+id/device1name"
+                    android:layout_below="@+id/device1text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -106,7 +106,7 @@
                     android:maxEms="10"
                     android:singleLine="true" />
                 <TextView
-                    android:id="@+id/newdisplaynumber"
+                    android:id="@+id/displaynumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -114,13 +114,13 @@
                     android:ellipsize="end"
                     android:maxEms="14"
                     android:singleLine="true"
-                    android:layout_below="@+id/newdevice1name" />
+                    android:layout_below="@+id/device1name" />
                 <TextView
-                    android:id="@+id/newtitletext"
+                    android:id="@+id/titletext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/newdisplaynumber" />
+                    android:layout_below="@+id/displaynumber" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -132,15 +132,15 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp">
                 <TextView
-                    android:id="@+id/newdevice2text"
+                    android:id="@+id/device2text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="DEVICE 2"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
                 <TextView
-                    android:id="@+id/newdevice2name"
-                    android:layout_below="@+id/newdevice2text"
+                    android:id="@+id/device2name"
+                    android:layout_below="@+id/device2text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -148,25 +148,25 @@
                     android:maxEms="10"
                     android:singleLine="true" />
                 <TextView
-                    android:id="@+id/newdisplaynumber2"
+                    android:id="@+id/displaynumber2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/newdevice2name"
+                    android:layout_below="@+id/device2name"
                     android:visibility="visible"
                     android:ellipsize="end"
                     android:maxEms="14"
                     android:singleLine="true" />
                 <TextView
-                    android:id="@+id/newtitletext2"
+                    android:id="@+id/titletext2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/newdisplaynumber2" />
+                    android:layout_below="@+id/displaynumber2" />
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/newedittext"
+                android:id="@+id/edittext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/carimage"
@@ -179,12 +179,12 @@
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/newedittext"
+                android:layout_below="@id/edittext"
                 android:layout_toRightOf="@id/carimage"
                 android:layout_marginRight="20dp">
                 <TableRow>
                     <Button
-                        android:id="@+id/newdial_button"
+                        android:id="@+id/dial_button"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
@@ -192,20 +192,20 @@
                         android:background="@drawable/dial"/>
 
                     <Button
-                        android:id="@+id/newendcall_button"
+                        android:id="@+id/endcall_button"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_toRightOf="@id/newdial_button"
+                        android:layout_toRightOf="@id/dial_button"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:visibility="invisible"
                         android:background="@drawable/end_call" />
 
                     <Button
-                        android:id="@+id/newredial_button"
+                        android:id="@+id/redial_button"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_toRightOf="@id/newendcall_button"
+                        android:layout_toRightOf="@id/endcall_button"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:visibility="invisible"
@@ -215,20 +215,21 @@
                     android:layout_marginTop="10dp"
                     android:layout_span="3">
                     <Button
-                        android:id="@+id/newcall_control"
+                        android:id="@+id/call_control"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@drawable/call_control"
                         android:visibility="invisible"
+                        android:layout_weight="1"
                         android:gravity="bottom|center"/>
 
                     <ToggleButton
-                        android:id="@+id/newdisconnect_button"
-                        android:layout_width="0dp"
+                        android:id="@+id/disconnect_button"
+                        android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
-                        android:visibility="invisible"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:gravity="center"
                         android:background="@drawable/hf_toggle"
                         android:textOn=""
@@ -236,10 +237,11 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"/>
                     <Button
-                        android:id="@+id/newenhanced_call_control"
+                        android:id="@+id/enhanced_call_control"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/enhanced_call_control"
                         android:visibility="invisible" />
                 </TableRow>
@@ -254,7 +256,7 @@
                 android:layout_centerInParent="true" />
 
             <ToggleButton
-                android:id="@+id/newvr_button"
+                android:id="@+id/vr_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_below="@id/dev2_container"
@@ -268,10 +270,10 @@
                 android:focusableInTouchMode="false"/>
 
             <Button
-                android:id="@+id/newswap_ui_button"
+                android:id="@+id/swap_ui_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_toRightOf="@id/newvr_button"
+                android:layout_toRightOf="@id/vr_button"
                 android:layout_below="@id/dev2_container"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"
