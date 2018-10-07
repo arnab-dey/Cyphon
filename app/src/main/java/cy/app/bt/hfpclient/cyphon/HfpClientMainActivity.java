@@ -1088,7 +1088,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                 mCurrentCallingDevice = mBluetoothDevice;
                 mDeviceName = mBluetoothDevice.getName();
                 mDeviceAddress = mBluetoothDevice.getAddress();
-                //tv_device1Name.setText(R.string.device1); //ARNB
                 tv_displayState1.setText(" Idle ");
                 tv_device1Name.setText(mDeviceName);
 
@@ -1355,27 +1354,23 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
             isOtherDeviceOnCall = false;
         }
         if(mBluetoothDevice.equals(device)) {
-            //b_dial.setText(dialStr); //ARNB
             b_dial.setVisibility(View.VISIBLE);
 
             b_redial.setVisibility(View.VISIBLE);
 
             et_numberEntry.setVisibility(View.VISIBLE);
 
-            //tv_device1Name.setText(R.string.device1); //ARNB
             tv_displayState1.setText(" Idle ");
             tv_device1Name.setText(mDeviceName);
             tv_displayNumber1.setText("");
         } else {
             if(mDeviceMap.containsKey(device)) {
-                //b_dial.setText(dialStr); //ARNB
                 b_dial.setVisibility(View.VISIBLE);
 
                 b_redial.setVisibility(View.VISIBLE);
 
                 et_numberEntry.setVisibility(View.VISIBLE);
 
-                //tv_device2Name.setText(R.string.device2); //ARNB
                 tv_displayState2.setText(" Idle ");
                 tv_device2Name.setText(mDeviceMap.get(device).mDeviceName);
                 tv_displayNumber2.setText("");
@@ -1383,14 +1378,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
 
         if(!isOtherDeviceOnCall) {
-            //endCall.setText(""); //ARNB
             b_endCall.setVisibility(View.INVISIBLE);
 
             b_callControl.setText("");
             b_callControl.setVisibility(View.INVISIBLE);
 
             b_enhancedCallControl.setText("");
-            //b_enhancedCallControl.setVisibility(View.GONE); //ARNB
             b_enhancedCallControl.setVisibility(View.INVISIBLE);
         }
 
@@ -1414,12 +1407,10 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
         switch(combinedAudioState) {
             case BluetoothHeadsetClient.STATE_AUDIO_CONNECTED:
-                //b_hfButton.setText(privacyMode); //ARNB
                 b_hfButton.setChecked(true);
                 showNotification(R.drawable.stat_sys_audio_state_on);
                 break;
             case BluetoothHeadsetClient.STATE_AUDIO_DISCONNECTED:
-                //b_hfButton.setText(handsfreeMode); //ARNB
                 b_hfButton.setChecked(false);
                 showNotification(R.drawable.stat_sys_audio_state_off);
                 break;
@@ -1525,14 +1516,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
             }
             if (!otherDeviceHasIncoming) {
 
-                //b_dial.setText(dialStr); //ARNB
                 b_dial.setVisibility(View.VISIBLE);
 
                 b_redial.setVisibility(View.VISIBLE);
 
                 et_numberEntry.setVisibility(View.VISIBLE);
 
-                //endCall.setText(endCallStr); //ARNB
                 b_endCall.setVisibility(View.VISIBLE);
 
                 b_callControl.setVisibility(View.VISIBLE);
@@ -1616,7 +1605,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                         tv_displayState2.setText(callStatus);
                     }
                 }
-                //endCall.setText(endCallStr); //ARNB
                 b_endCall.setVisibility(View.VISIBLE);
                 break;
             case BluetoothHeadsetClientCall.CALL_STATE_WAITING:
@@ -1641,7 +1629,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                         tv_displayState2.setText(callStatus);
                     }
                 }
-                //endCall.setText(endCallStr); //ARNB
                 b_endCall.setVisibility(View.VISIBLE);
                 break;
             case BluetoothHeadsetClientCall.CALL_STATE_INCOMING:
@@ -1924,7 +1911,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                                         editor.putString(CyHfpClientDeviceConstants.HF_DEVICE_NAME, activity.mDeviceName);
                                         editor.apply();
                                         activity.showNotification(R.drawable.stat_sys_device_connected);
-                                        //activity.tv_device1Name.setText(R.string.device1); //ARNB
                                         activity.tv_displayState1.setText(" Idle ");
                                         activity.tv_device1Name.setText(activity.mDeviceName);
                                     } else {
@@ -1933,7 +1919,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                                                 activity.mBluetoothDevice.getName() + " address: " + activity.mDeviceAddress +
                                                 " mBluetoothDevice.getAddress(): " + activity.mBluetoothDevice.getAddress());
                                         activity.showNotification(R.drawable.stat_sys_device_connected);
-                                        //activity.tv_device2Name.setText(R.string.device2); //ARNB
                                         activity.tv_displayState2.setText(" Idle ");
                                         activity.tv_device2Name.setText(((BluetoothDevice)msg.obj).getName());
                                     }
