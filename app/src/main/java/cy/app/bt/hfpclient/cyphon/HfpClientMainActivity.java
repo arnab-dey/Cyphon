@@ -182,6 +182,9 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
     private Context mContext;
     private HashMap<BluetoothDevice, DeviceInfo> mDeviceMap = new HashMap<>();
 
+    /**
+     * Class to store device info for multi device scenario
+     */
     private class DeviceInfo {
         public String mDeviceName;
         public String mDeviceAddress;
@@ -287,6 +290,11 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * Function to either fetch or create new Device info
+     * @param device
+     * @return DeviceInfo
+     */
     private synchronized DeviceInfo getDeviceInfo(BluetoothDevice device) {
         if(null == device) {
             Log.e(TAG, "getDeviceInfo: Device is null!!!");
@@ -304,6 +312,10 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         return di;
     }
 
+    /**
+     * Remove a device from DeviceInfo HashMap
+     * @param device
+     */
     private void clearDeviceInfo(BluetoothDevice device) {
         if(mDeviceMap.containsKey(device)) {
             mDeviceMap.remove(device);
@@ -329,6 +341,9 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * Service listener for proxy objects
+     */
     private BluetoothProfile.ServiceListener mProfileListener = new BluetoothProfile.ServiceListener() {
         @Override
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
@@ -393,8 +408,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         this.registerReceiver(br, filter);
 
         userSelected = false;
-
-        //c.getLatestInboxMessages(device, 2);
     }
 
     @Override
@@ -681,6 +694,10 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * Function to place a call
+     * @param device
+     */
     private void dialNumber(BluetoothDevice device) {
         dialedNumber = et_numberEntry.getText().toString();
         if (0 != dialedNumber.length()) {
@@ -707,10 +724,19 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * Function to accept a call
+     * @param device
+     * @return boolean
+     */
     private boolean answerCall(BluetoothDevice device) {
         return mBluetoothHeadsetClient.acceptCall(device, 0);
     }
 
+    /**
+     * Function to hang up a call
+     * @param device
+     */
     private void endCall(BluetoothDevice device) {
         Log.d(TAG, "endCall function called");
         BluetoothHeadsetClientCall callInfo = getClientCall(device);
@@ -752,6 +778,11 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * This function finds if active calls are present in more than
+     * one devices, if so, it prompts user to select device otherwise
+     * ends call on the only device having active call
+     */
     public void findDevAndEndCall() {
         int numDevWithActiveCall = 0;
         for (BluetoothDevice bd : mDeviceMap.keySet()) {
@@ -767,6 +798,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
 
     }
 
+    /**
+     * This function finds if more than one device have
+     * active calls, if so, it prompts user to choose device,
+     * otherwise provides call control options for the only
+     * device having active call
+     */
     private void findDevAndCallControl() {
         int numDevWithActiveCall = 0;
         for (BluetoothDevice bd : mDeviceMap.keySet()) {
@@ -781,6 +818,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * This function finds if more than one devices have active call,
+     * if so, it prompts user to select device, otherwise, it
+     * provides enhanced call control options for the only device
+     * having active calls
+     */
     private void findDevAndEnCallControl() {
         int numDevWithActiveCall = 0;
         for (BluetoothDevice bd : mDeviceMap.keySet()) {
@@ -795,6 +838,13 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * Function to redial
+     * If there are more than one device connected, it prompts
+     * user to select device, otherwise place redial instruction to only device
+     * connected.
+     * @param device
+     */
     private void redial(BluetoothDevice device) {
         if(null == mBluetoothHeadsetClient.dial(device, null)) { /*b_redial*/
             Log.e(TAG, "onClick: redialing failed as device got disconnected");
@@ -815,6 +865,13 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         showNotification(R.drawable.stat_sys_audio_state_off);
     }
 
+    /**
+     * This function provides call control options.
+     * If there are more than one device connected, it prompts user
+     * to select device, otherwise provides call control options for the only device
+     * connected.
+     * @param device
+     */
     private void callControl(BluetoothDevice device) {
         BluetoothHeadsetClientCall callInfo = getClientCall(device);
         if(null != callInfo) {
@@ -837,6 +894,10 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * Function for Enhanced call control options.
+     * @param device
+     */
     private void enCallControl(BluetoothDevice device) {
         showHfpClientDialog(device, CyHfpClientDeviceConstants.HF_DEVICE_ENHANCED_CALL_CONTROL_DIALOG_ID, null);
     }
@@ -897,6 +958,10 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         }
     }
 
+    /**
+     * This function updates the UI with the device stats
+     * on start of the application.
+     */
     private void updateUi() {
         Log.d(TAG, "updateUi()");
         if(0 == mBluetoothHeadsetClient.getConnectedDevices().size()) {
@@ -1001,7 +1066,8 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
 
     /**
      * This function is used to swap currently showing device info with second device
-     * on Ui
+     * on UI - it interchanges Device 1 with Device 2
+     * This function is not optimized - TODO - Optimize this function implementation
      */
     private void swapUi(BluetoothDevice device) {
         Log.d(TAG, "swapUi()");
@@ -1270,23 +1336,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
         long[] timings = {200, 500};
         vibrator.vibrate(VibrationEffect.createWaveform(timings, 0));
         isVibrating = true;
-
-        //b_dial.setText(answerStr);
-        //b_dial.setVisibility(View.VISIBLE);
-
-        //b_redial.setVisibility(View.INVISIBLE);
-
-        //et_numberEntry.setVisibility(View.INVISIBLE);
-
-        //endCall.setText(rejectStr);
-        //endCall.setVisibility(View.VISIBLE);
-
-        //b_callControl.setText("");
-        //b_callControl.setVisibility(View.INVISIBLE);
-
-        //b_hfButton.setText("");
-        //b_hfButton.setVisibility(View.INVISIBLE);
-
     }
 
     private void updateViewOnPhoneHook(BluetoothDevice device) {
@@ -1312,15 +1361,6 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
             b_redial.setVisibility(View.VISIBLE);
 
             et_numberEntry.setVisibility(View.VISIBLE);
-
-            //endCall.setText("");
-            //endCall.setVisibility(View.INVISIBLE);
-
-            //b_callControl.setText("");
-            //b_callControl.setVisibility(View.INVISIBLE);
-
-            //b_enhancedCallControl.setText("");
-            //b_enhancedCallControl.setVisibility(View.INVISIBLE);
 
             //tv_device1Name.setText(R.string.device1); //ARNB
             tv_displayState1.setText(" Idle ");
@@ -1497,12 +1537,12 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
 
                 b_callControl.setVisibility(View.VISIBLE);
 
-        /*When there is only one active call*/
+                /*When there is only one active call*/
                 if ((0 != numActive) && (0 == numHeld)) {
                     b_callControl.setText(holdCall);
                 }
 
-        /*When there is only held call*/
+                /*When there is only held call*/
                 if ((0 == numActive) && (0 != numHeld)) {
                     b_callControl.setText(unholdCall);
                     if (mBluetoothDevice.equals(device)) {
@@ -1518,7 +1558,7 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                     }
                 }
 
-        /*When there is more than one call*/
+                /*When there is more than one call*/
                 if ((0 != numActive) && (0 != numHeld)) {
                     b_callControl.setText(multiCallControl);
                 }
@@ -2714,18 +2754,7 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
                     if(BluetoothHeadsetClient.STATE_AUDIO_CONNECTED == newState) {
                         if(intent.hasExtra(BluetoothHeadsetClient.EXTRA_AUDIO_WBS)) {
                             Log.d(TAG, "wbs state = " + intent.getBooleanExtra(BluetoothHeadsetClient.EXTRA_AUDIO_WBS, false));
-                            //ag.setBluetoothScoOn(true);
-                            //ag.stopBluetoothSco();
-                            //ag.setMode(AudioManager.MODE_NORMAL);
-                            //ag.setParameters("hfp_volume=0");
-                            //ag.setStreamVolume(AudioManager.STREAM_MUSIC, ag.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
-                            //ag.setStreamVolume(AudioManager.STREAM_VOICE_CALL, ag.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), AudioManager.FLAG_SHOW_UI);
-                            //ag.setStreamVolume(6, ag.getStreamMaxVolume(6), AudioManager.FLAG_SHOW_UI);
                             checkandRequestAudioFocus();
-                            //ag.requestAudioFocus(null, 6, AudioManager.AUDIOFOCUS_GAIN);
-                            //ag.setMode(AudioManager.MODE_IN_COMMUNICATION);
-                            //ag.setBluetoothScoOn(true);
-                            //ag.setSpeakerphoneOn(true);
                             Log.d(TAG, "is SCO on = " + ag.isBluetoothScoOn());
                             Log.d(TAG, "is Music active = " + ag.isMusicActive());
                             Log.d(TAG, "is speaker phone on = " + ag.isSpeakerphoneOn());
