@@ -1385,6 +1385,7 @@ public class HfpClientMainActivity extends Activity implements View.OnClickListe
 
             b_enhancedCallControl.setText("");
             b_enhancedCallControl.setVisibility(View.INVISIBLE);
+            b_hfButton.setVisibility(View.INVISIBLE);
         }
 
         if(mBluetoothDevice.equals(device)) {

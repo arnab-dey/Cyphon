@@ -221,6 +221,7 @@
                         android:background="@drawable/call_control"
                         android:visibility="invisible"
                         android:layout_weight="1"
+                        android:textSize="7dp"
                         android:gravity="bottom|center"/>
 
                     <ToggleButton
@@ -230,7 +231,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:visibility="invisible"
-                        android:gravity="center"
+                        android:gravity="bottom|center"
                         android:background="@drawable/hf_toggle"
                         android:textOn=""
                         android:textOff=""
@@ -242,6 +243,7 @@
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
+                        android:layout_gravity="bottom|center"
                         android:background="@drawable/enhanced_call_control"
                         android:visibility="invisible" />
                 </TableRow>
